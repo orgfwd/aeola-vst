@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aeola manual</title>
+<meta name="description" content="Everything Aeola does, on one page.">
+<link rel="icon" href="icon-1024.png">
+<style>
+  :root { --bg:#141618; --panel:#1b1d20; --edge:#2b2e33; --text:#dde1e4; --dim:#8a9299; --accent:#6ed6a0; --amber:#e8b25a; }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 84px; }
+  body { margin:0; background:var(--bg); color:var(--text); font:17px/1.6 -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 0 22px 96px; }
+  h1 { font-size: 15px; letter-spacing: .32em; font-weight: 600; margin: 48px 0 6px; }
+  h1 small { color: var(--dim); font-weight: 400; letter-spacing: .1em; font-size: 12px; margin-left: 6px; }
+  h2 { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); font-weight: 600; margin: 0 0 12px; }
+  h3 { font-size: 16px; margin: 22px 0 6px; }
+  section { padding-top: 36px; border-top: 1px solid var(--edge); margin-top: 36px; }
+  p { margin: 0 0 12px; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  ul, ol { padding-left: 22px; margin: 0 0 12px; } li { margin-bottom: 5px; }
+  dl { margin: 0 0 12px; } dt { font-weight: 600; margin-top: 10px; } dd { margin: 2px 0 0 0; color: var(--text); }
+  code, kbd { background: var(--panel); border: 1px solid var(--edge); border-radius: 4px; padding: 1px 6px; font-size: 14px; font-family: ui-monospace, Menlo, monospace; }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; margin: 6px 0 14px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--edge); vertical-align: top; }
+  th { color: var(--dim); font-weight: 600; font-size: 13px; }
+  .dim { color: var(--dim); font-size: 15px; }
+  .note { background: var(--panel); border: 1px solid var(--edge); border-radius: 6px; padding: 10px 14px; font-size: 15px; margin: 8px 0 14px; }
+  .bar { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 14px 0 12px; border-bottom: 1px solid var(--edge); }
+  .bar input { width: 100%; font: inherit; font-size: 16px; color: var(--text); background: var(--panel); border: 1px solid var(--edge); border-radius: 6px; padding: 9px 12px; outline: none; }
+  .bar input:focus { border-color: var(--accent); }
+  .bar .count { color: var(--dim); font-size: 13px; margin-top: 6px; min-height: 18px; }
+  nav ol { columns: 2; column-gap: 32px; padding-left: 22px; font-size: 15px; }
+  nav li { break-inside: avoid; }
+  nav li.hidden, section.hidden { display: none; }
+  mark { background: rgba(232,178,90,.35); color: inherit; border-radius: 2px; }
+  .top { font-size: 13px; color: var(--dim); text-decoration: none; float: right; }
+  footer { margin-top: 56px; color: var(--dim); font-size: 14px; border-top: 1px solid var(--edge); padding-top: 18px; }
+  @media (max-width: 600px) { nav ol { columns: 1; } }
+</style>
+</head>
+<body>
+<main>
+<h1 id="top">AEOLA<small>MANUAL</small></h1>
+<p class="dim">For Aeola 1.13. <a href="index.html">Back to the Aeola page</a>.</p>
+
+<div class="bar">
+  <input id="q" type="search" placeholder="Search the manual (press / to focus), e.g. radius, MIDI out, quota, helicopter" autocomplete="off" aria-label="Search the manual">
+  <div class="count" id="count"></div>
+</div>
+
+<nav id="toc">
+<h2 style="margin-top:24px">Contents</h2>
+<ol>
+  <li><a href="#start">Quick start</a></li>
+  <li><a href="#install">Install and update</a></li>
+  <li><a href="#how">How the sky becomes music</a></li>
+  <li><a href="#window">The window: Simple and Advanced</a></li>
+  <li><a href="#header">Top bar</a></li>
+  <li><a href="#place">Place and radius</a></li>
+  <li><a href="#views">Sky views: Sound, Sky, Earth</a></li>
+  <li><a href="#card">Aircraft card and class chips</a></li>
+  <li><a href="#data">Where the traffic comes from</a></li>
+  <li><a href="#quota">Daily data limit</a></li>
+  <li><a href="#classes">Aircraft classes (Aircraft tab)</a></li>
+  <li><a href="#sound">Sound tab</a></li>
+  <li><a href="#sources">The 18 sound sources</a></li>
+  <li><a href="#tune">Tune &amp; Space tab</a></li>
+  <li><a href="#filter">Filter tab</a></li>
+  <li><a href="#motion">Modulation tab: LFOs and the Matrix</a></li>
+  <li><a href="#skytab">Sky tab: key, scale, Consonance</a></li>
+  <li><a href="#mix">Mix tab and separate outputs</a></li>
+  <li><a href="#macros">Macros</a></li>
+  <li><a href="#presets">Presets, A/B and Randomise</a></li>
+  <li><a href="#play">Playing it with a keyboard</a></li>
+  <li><a href="#midiout">MIDI out</a></li>
+  <li><a href="#classtracks">One class per track in Live</a></li>
+  <li><a href="#dragmidi">Drag MIDI</a></li>
+  <li><a href="#render">Recording and repeatable renders</a></li>
+  <li><a href="#outputs">Outputs</a></li>
+  <li><a href="#automation">Automation in your DAW</a></li>
+  <li><a href="#hostonly">Controls without automation</a></li>
+  <li><a href="#settings">Settings menu</a></li>
+  <li><a href="#keys">Keyboard and mouse</a></li>
+  <li><a href="#trouble">Troubleshooting</a></li>
+  <li><a href="#privacy">Data, privacy and credits</a></li>
+</ol>
+</nav>
+
+<section id="start" data-keys="begin first getting started tutorial">
+<h2>Quick start <a class="top" href="#top">top</a></h2>
+<ol>
+  <li>Load <b>Aeola</b> on an instrument track (VST3 or Audio Unit), or open the standalone app.</li>
+  <li>Click the place name at the top left of the sky view and pick an airport, or search for your own town.</li>
+  <li>Wait a few seconds for live traffic. Every aircraft in range starts to sound; a drone bed plays underneath.</li>
+  <li>Turn the four macros (<b>Tension, Light, Motion, Space</b>) to shape the mood, and <b>Radius</b> to choose how many aircraft you hear.</li>
+  <li>Play notes on a MIDI keyboard on top if you like. Click <b>Advanced</b> for every control.</li>
+</ol>
+<p>The first time you open Aeola, a short tour points at the sky, the place button and the macros. Click <b>?</b> in the top bar to see it again.</p>
+</section>
+
+<section id="install" data-keys="installer rescan duplicate old version update download notarize gatekeeper">
+<h2>Install and update <a class="top" href="#top">top</a></h2>
+<p>The installer puts the Audio Unit in <code>/Library/Audio/Plug-Ins/Components</code>, the VST3 in <code>/Library/Audio/Plug-Ins/VST3</code> and the optional standalone app in <code>/Applications</code>. "Install for me only" uses your own <code>~/Library</code> folders instead. It runs natively on Apple-silicon and Intel Macs (macOS 11 or later on Apple silicon, 10.13 or later on Intel). There is no Windows version and no VST2.</p>
+<p>The installer is not notarized by Apple. The first time, macOS refuses to open it: open System Settings, Privacy &amp; Security, and click <b>Open Anyway</b>.</p>
+<h3>Old versions and two Aeolas in your host</h3>
+<p>Aeola was called "Aeola Drone" and then "Aeola VST". The installer deletes those old bundles from <code>/Library/Audio/Plug-Ins</code>. Copies you put in your own <code>~/Library/Audio/Plug-Ins</code> folders are not touched: delete them by hand, or your host may list two Aeolas and load the old one. All versions share the same plug-in ID, so projects made with older versions open with the new one.</p>
+<h3>Rescan</h3>
+<p>After installing, rescan plug-ins. Ableton Live: Settings, Plug-ins, hold Option and click <b>Rescan</b>. Logic: Settings, Plug-in Manager, Reset &amp; Rescan Selection.</p>
+<h3>Update notice</h3>
+<p>Once a day at most, Aeola reads one small file on this website to see if there is a newer version. If there is, the Settings button shows a dot and the menu has a download item. Turn it off in Settings.</p>
+</section>
+
+<section id="how" data-keys="mapping pitch note altitude distance pan">
+<h2>How the sky becomes music <a class="top" href="#top">top</a></h2>
+<dl>
+  <dt>Altitude sets the note</dt><dd>Higher flight, higher note. Notes are snapped to the chosen key and scale. <b>Range</b> sets how many octaves the altitudes (ground to 42,000 ft) cover, <b>Lowest octave</b> where they start.</dd>
+  <dt>Distance sets level and brightness</dt><dd>Closer aircraft are louder and brighter, far ones quiet and darker.</dd>
+  <dt>Direction sets the pan</dt><dd>Aircraft east of your place sound on the right, west on the left.</dd>
+  <dt>The kind of aircraft sets the voice</dt><dd>Nine classes (light, small, narrowbody, heavy, helicopter, freight, business jet, turboprop, military) each have their own timbre, level, octave, swell and chop. See <a href="#classes">Aircraft classes</a>.</dd>
+  <dt>Consonance keeps it musical</dt><dd>When a new note would clash with what is already sounding, Aeola moves it to a nearby scale note, or silences that aircraft. High Consonance = always pleasant, low = tension and clusters allowed. Aircraft also avoid doubling each other's note, so a busy sky spreads into a chord.</dd>
+  <dt>Overhead swell</dt><dd>An aircraft passing close to you blooms in level and brightness, then fades.</dd>
+  <dt>Drone bed</dt><dd>A steady root note (the <b>Anchor</b>, optionally with a fifth) gives everything a reference. When the sky is quiet, soft <b>ghost</b> notes from the scale fill in.</dd>
+  <dt>Evolve</dt><dd>Over minutes, the register and brightness slowly move so a long piece keeps changing.</dd>
+  <dt>How many sound</dt><dd><b>Aircraft</b> is the exact number of aircraft allowed to sound at once, nearest first (also limited by <b>Voices</b>). The anchor and ghosts are extra.</dd>
+</dl>
+</section>
+
+<section id="window" data-keys="interface layout ui resize size">
+<h2>The window: Simple and Advanced <a class="top" href="#top">top</a></h2>
+<p><b>Simple</b> shows the sky large, with a strip below: place, sky source, the base sound, Colour, Reverb, Cutoff and the four macros. A one-line hint tells you what to expect at the chosen place.</p>
+<p><b>Advanced</b> keeps the sky view and adds a drawer with seven tabs: <a href="#classes">Aircraft</a>, <a href="#sound">Sound</a>, <a href="#tune">Tune &amp; Space</a>, <a href="#filter">Filter</a>, <a href="#motion">Motion</a>, <a href="#skytab">Sky</a> and <a href="#mix">Mix</a>. Radius, Aircraft and the macros sit on the right. The button in the top bar switches between the two; your choice is saved with the project.</p>
+<p>Under the sky view a status line says what is happening (where the data comes from, how many aircraft, how old the data is) and a hint line gives advice, for example "Some notes are clashing. Raise Consonance".</p>
+<p>Knobs show their name; hover to see the value. Right-click (or Ctrl-click) a knob to type a value or, on knobs that can be modulated, to connect a source (<a href="#motion">Modulate by</a>). Every control has a tooltip. Drag the corner to resize the window, or set a size in Settings.</p>
+</section>
+
+<section id="header">
+<h2>Top bar <a class="top" href="#top">top</a></h2>
+<dl>
+  <dt>Preset menu and &lt; &gt;</dt><dd>Choose a factory or user preset, or step through them. See <a href="#presets">Presets</a>.</dd>
+  <dt>Save</dt><dd>Save the current sound as a user preset.</dd>
+  <dt>Randomise</dt><dd>A random sound within musical limits. The sky always stays in key.</dd>
+  <dt>A, slider, B</dt><dd>Two sound snapshots and a morph between them. See <a href="#presets">A/B</a>.</dd>
+  <dt>OUT</dt><dd>Output level.</dd>
+  <dt>Simple / Advanced</dt><dd>Switch between the few essential controls and all of them.</dd>
+  <dt>Settings</dt><dd>See <a href="#settings">Settings menu</a>. A dot means a new version is available.</dd>
+  <dt>?</dt><dd>The intro tour.</dd>
+</dl>
+</section>
+
+<section id="place" data-keys="location city address coordinates airport zoom search town">
+<h2>Place and radius <a class="top" href="#top">top</a></h2>
+<p>Click the place name in the top-left corner of the sky view. The menu has:</p>
+<ul>
+  <li><b>Search a city or enter coordinates...</b> Type a town or address (needs internet, uses OpenStreetMap's search), or coordinates like <code>59.33, 18.07</code>.</li>
+  <li><b>Airports</b>: Stockholm Arlanda, Cologne Bonn, London Heathrow, Amsterdam Schiphol, Frankfurt, Copenhagen, Oslo Gardermoen, Helsinki-Vantaa, New York JFK, Los Angeles, Tokyo Haneda, Sydney, Paris Charles de Gaulle, Munich, Madrid Barajas, Zurich, Gothenburg Landvetter, Chicago O'Hare, Dubai and Singapore Changi. They are shown with their IATA code (ARN, CGN, LHR, ...).</li>
+  <li><b>Recent places</b> you have searched for.</li>
+</ul>
+<p>In Advanced, the Sky tab also has <b>Places to try</b>: one-click places with different characters.</p>
+<p><b>Radius</b> (5 to 250 nautical miles) is how far from your place aircraft are heard. Small = a few close planes, "the planes above me". Large = a dense, abstract texture. Turn the Radius knob, drag the dashed circle on the Sky map, use <kbd>+</kbd> and <kbd>-</kbd>, or scroll over the Sound or Earth view. Press <kbd>0</kbd> for 40 nm. On the Sky map, scrolling and the zoom buttons zoom the map, not the radius.</p>
+<p>Presets and A/B never change your place, radius, sky source, solo/mute or output level: a sound is separate from where you listen.</p>
+</section>
+
+<section id="views" data-keys="map radar earth 3d view tilt rotate">
+<h2>Sky views: Sound, Sky, Earth <a class="top" href="#top">top</a></h2>
+<p>Switch views with the buttons at the top right of the sky view, or keys <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> (click the view first). The choice is saved with the project.</p>
+<h3>Sound</h3>
+<p>One column per scale note, low notes left. Each aircraft sits in the column of the note it plays; its height is its distance (loudest at the top). Class shapes and colours match the class chips. A dashed amber arrow shows an aircraft that Consonance moved to a different note; a red X marks an aircraft that was silenced because it would clash. The notes of the drone bed are listed at the bottom right, and the footer counts how many aircraft are sounding, moved and silenced.</p>
+<h3>Sky</h3>
+<p>A north-up map that fills the view, with land and sea, airports, a north arrow and a scale bar. The listening radius is one <b>dashed circle</b>: aircraft inside it sound, aircraft outside it are drawn dim and silent, with a short trail. Aircraft heading in show "in N min"; hover one to see where it is going ("enters the circle in ~4 min", or "passing by"). A ring marks each aircraft that crosses the circle: green coming in, grey going out.</p>
+<ul>
+  <li><b>Drag the circle's edge</b> to change the radius.</li>
+  <li><b>Scroll</b> or use the <b>+ / -</b> buttons to zoom the map; <b>drag</b> an empty spot to move it; <b>double-click</b> to go back to the circle.</li>
+  <li>Press <kbd>L</kbd> or click the land chip to show or hide the land. Land shapes are simplified, so small islands and harbours look soft when zoomed in close.</li>
+  <li>Live data reaches about twice the radius (at least 30 nm beyond it, at most 250 nm); a faint ring marked "data ends" shows where. The simulator only fills the circle.</li>
+</ul>
+<h3>Earth</h3>
+<p>A tilted 3D view of the ground with land, lakes and range rings. Each aircraft hangs at its altitude on a stem, with a trail and its shadow on the ground. Drag left and right to rotate, up and down to tilt; double-click to reset.</p>
+<h3>Ground traffic</h3>
+<p>Up to 12 aircraft on the ground near your place are shown as dashed hollow diamonds. They never sound.</p>
+</section>
+
+<section id="card" data-keys="hover pin solo mute chip audition">
+<h2>Aircraft card and class chips <a class="top" href="#top">top</a></h2>
+<p>Hover over an aircraft to see its card: callsign, aircraft type, class, altitude, speed, distance, the note it plays, what Consonance did ("moved off D3 by Consonance (it would clash)") and when it will leave the circle. Click to pin the card; click again or press <kbd>Esc</kbd> to unpin. The card places itself where it hides the fewest aircraft.</p>
+<p>The row of class chips above the view shows how many aircraft of each class are in range.</p>
+<ul>
+  <li><b>Click</b> a chip: solo that class (several can be soloed).</li>
+  <li><b>Alt-click</b> or right-click: mute it.</li>
+  <li><b>Double-click</b>: clear all solos and mutes.</li>
+  <li>With a card pinned, <kbd>S</kbd> solos and <kbd>M</kbd> mutes that aircraft's class.</li>
+</ul>
+<div class="note">If you solo a class that has no aircraft in the sky, Aeola plays one virtual aircraft labelled AUDITION so you can hear and tune that voice. It is not real traffic.</div>
+</section>
+
+<section id="data" data-keys="adsb live feed internet source offline simulation">
+<h2>Where the traffic comes from <a class="top" href="#top">top</a></h2>
+<p>Live positions come from <a href="https://adsb.lol">adsb.lol</a>, a community network of receivers. The <b>Sky source</b> setting (Sky tab, or the Simple strip) chooses:</p>
+<dl>
+  <dt>Auto (default)</dt><dd>Live data. If live data stops, the last real snapshot, clearly labelled "Saved snapshot from N min ago. Not live." With nothing saved, only the drone bed plays, and the hint line says why. Auto never invents traffic.</dd>
+  <dt>Live</dt><dd>Live data only.</dd>
+  <dt>Cached</dt><dd>The last saved snapshot for this place, without fetching.</dd>
+  <dt>Replay</dt><dd>Plays back traffic frozen inside your project (see <a href="#render">Freeze</a>).</dd>
+  <dt>Simulated</dt><dd>Invented traffic that needs no internet, shown with a red "not real" label. <b>Sim traffic</b> sets how busy it is; <b>Sim seed</b> picks a different repeatable sky (both in the Sky tab while Simulated is chosen).</dd>
+</dl>
+<p>Between snapshots, aircraft are moved along their course, so they glide instead of jumping. Positions older than a minute are dropped. Past 45 seconds the badge says "Live, delayed". The trust line under the view shows the source, how many aircraft are in the air within range, and the age of the data.</p>
+<p>Different receivers see different aircraft, so the count can differ from flight-tracking websites.</p>
+</section>
+
+<section id="quota" data-keys="quota rate limit 429 requests per day empty sky">
+<h2>Daily data limit <a class="top" href="#top">top</a></h2>
+<p>adsb.lol allows 500 requests a day per internet connection (all devices at home share it). It resets at 00:00 UTC. Aeola reads how many requests are left and spreads them over the rest of the day, so a new snapshot normally arrives every one to three minutes (never more often than every 20 seconds). Several Aeolas in one project share one request per place for that whole interval, and a copy that another program (or Aeola before a restart) fetched a moment ago is used instead of asking again. Settings, Details for a bug report shows how many requests this Mac made today.</p>
+<p>When the limit is reached, Aeola says so and when it resets, keeps the last real snapshot, and plays the drone bed. Settings has an optional backup, <b>adsb.fi</b>, used only while adsb.lol's limit is reached. It is off by default because adsb.fi allows personal, non-commercial use only.</p>
+<p class="dim">Tips: fewer separate Aeolas fetching, fewer place changes, and only one computer at home running Aeola all help. Aeolas following another one for MIDI out never fetch (see <a href="#classtracks">class tracks</a>).</p>
+</section>
+
+<section id="classes" data-keys="aircraft types heavy jets cargo freight helicopter private jet">
+<h2>Aircraft classes (Aircraft tab) <a class="top" href="#top">top</a></h2>
+<table>
+<tr><th>Class</th><th>What it is</th><th>Default voice</th></tr>
+<tr><td>Light / GA</td><td>Small private planes, low and slow</td><td>Flute, an octave up, comes and goes</td></tr>
+<tr><td>Small</td><td>Regional jets and small airliners</td><td>Reed, light</td></tr>
+<tr><td>Narrowbody</td><td>Everyday airliners (A320, 737)</td><td>The base sound from the Sound tab</td></tr>
+<tr><td>Heavy</td><td>Wide-body long-haul jets</td><td>Choir Ah, an octave down, slow swell</td></tr>
+<tr><td>Helicopter</td><td>Helicopters, low and close</td><td>Reed, chopped like a rotor</td></tr>
+<tr><td>Freight</td><td>Parcel and cargo jets, mostly at night</td><td>Bowl, an octave down, slow</td></tr>
+<tr><td>Business jet</td><td>Private jets, fast and high</td><td>Glass, an octave up</td></tr>
+<tr><td>Turboprop</td><td>Propeller airliners</td><td>Organ with a propeller flutter</td></tr>
+<tr><td>Military</td><td>Military aircraft</td><td>Grit, forward and a little louder</td></tr>
+</table>
+<p>Select a class in the list to edit it. Each class has:</p>
+<dl>
+  <dt>Timbre</dt><dd>One of the <a href="#sources">sound sources</a>, or <b>Global</b> = the main sound from the Sound tab.</dd>
+  <dt>Gain</dt><dd>-12 to +6 dB relative to the other classes: the class's built-in loudness, part of its voice and scaled by Class contrast. The Mix tab's fader comes after it.</dd>
+  <dt>Register</dt><dd>-2 to +2 octaves relative to what altitude gives.</dd>
+  <dt>Swell time</dt><dd>How quickly the class fades in and out. Low = quick, high = slow swells.</dd>
+  <dt>Chop</dt><dd>Amplitude beating like rotor blades or propellers.</dd>
+  <dt>S and M</dt><dd>Solo and mute (same as the chips).</dd>
+</dl>
+<p><b>Class contrast</b> sets how different the classes sound: 0 = every aircraft uses the main voice, 100% = every class has its full character. Below about a third, the class octave shifts are off too. <b>Overhead swell</b> turns the bloom of nearby aircraft on and off.</p>
+</section>
+
+<section id="sound" data-keys="timbre synth tone oscillator additive">
+<h2>Sound tab <a class="top" href="#top">top</a></h2>
+<p>The base sound: the drone bed, the Narrowbody class and every class set to Global. Aeola is an additive synth: each tone is built from overtones.</p>
+<dl>
+  <dt>Source A, Source B, Morph</dt><dd>Two tone colours and a continuous blend between them; the overtones slide from one spectrum to the other. Hover over a choice in the list to read what it sounds like. In Simple mode only Source A is shown.</dd>
+  <dt>Morph motion</dt><dd>Every tone drifts between A and B on its own, so no two notes sound exactly alike.</dd>
+  <dt>Life</dt><dd>Every overtone wanders slightly in level and tuning. 0 = frozen, high = shimmering.</dd>
+  <dt>Air</dt><dd>Breath and bow noise belonging to the sources.</dd>
+  <dt>Colour</dt><dd>Tilts the whole spectrum: left dark and round, right bright and rich.</dd>
+  <dt>Odd/Even</dt><dd>Odd overtones = hollow, clarinet-like; even = fuller, organ-like.</dd>
+  <dt>Inharmonic</dt><dd>Stretches the overtones out of tune, towards bell and glass.</dd>
+  <dt>Beat</dt><dd>A slightly detuned copy of every tone: a slow shimmer at this rate (Hz).</dd>
+  <dt>Drift, Drift rate</dt><dd>Slow wandering of pitch and volume, and how quickly.</dd>
+  <dt>Breath</dt><dd>Every tone swells and fades on its own loop length; the lengths differ, so the pattern never repeats.</dd>
+  <dt>Attack, Release</dt><dd>Fade-in and fade-out times (up to 20 and 30 seconds).</dd>
+  <dt>Voices</dt><dd>Most aircraft tones at once (1 to 16). The anchor drone is extra.</dd>
+  <dt>Pan spread</dt><dd>How wide tones spread across the stereo field.</dd>
+  <dt>Velocity</dt><dd>How much key velocity changes the level of notes you play.</dd>
+  <dt>Mod wheel, Bend range</dt><dd>How much the mod wheel brightens, and the pitch-wheel range (under More controls).</dd>
+</dl>
+</section>
+
+<section id="sources">
+<h2>The 18 sound sources <a class="top" href="#top">top</a></h2>
+<table>
+<tr><td>Glass</td><td>Clean and bell-like; the original Aeola sound.</td></tr>
+<tr><td>Organ</td><td>Drawbar organ: stable and hollow.</td></tr>
+<tr><td>Choir Ah</td><td>Open vowel "ah"; voices that follow the pitch.</td></tr>
+<tr><td>Choir Oh</td><td>Rounded vowel "oh"; darker and warmer.</td></tr>
+<tr><td>Choir Ee</td><td>Bright vowel "ee"; thin and shining.</td></tr>
+<tr><td>Bowed</td><td>Bowed strings with a body resonance.</td></tr>
+<tr><td>Reed</td><td>Clarinet-like: odd overtones, woody.</td></tr>
+<tr><td>Flute</td><td>Breathy and pure.</td></tr>
+<tr><td>Brass</td><td>Swelling overtones like a horn section.</td></tr>
+<tr><td>Bell</td><td>Inharmonic bell with a low hum tone.</td></tr>
+<tr><td>Bowl</td><td>Singing bowl: pairs of modes that beat slowly.</td></tr>
+<tr><td>Metal</td><td>Dense, inharmonic and cold.</td></tr>
+<tr><td>Pad</td><td>Wide, slowly chorusing pad.</td></tr>
+<tr><td>Breath</td><td>Mostly air with a faint pitch.</td></tr>
+<tr><td>Saw</td><td>Bright and buzzy: every overtone, falling slowly.</td></tr>
+<tr><td>Pulse</td><td>Hollow, nasal pulse wave; every fourth overtone missing.</td></tr>
+<tr><td>Grit</td><td>Saw with stretched, slightly out-of-tune overtones and a rasp of noise.</td></tr>
+<tr><td>Rust</td><td>Corroded metal: dense inharmonic partials, noisy and restless.</td></tr>
+</table>
+<p class="dim">With inharmonic sources (Bell, Bowl, Metal, Rust) Consonance listens to the actual overtones, not only the intervals, to decide what clashes.</p>
+</section>
+
+<section id="tune" data-keys="tuning just intonation pythagorean meantone reverb glide">
+<h2>Tune &amp; Space tab <a class="top" href="#top">top</a></h2>
+<dl>
+  <dt>North</dt><dd>0% = piano tuning (equal temperament). 100% = pure ratios. Move it and listen to the beating between notes melt away.</dd>
+  <dt>Tuning system</dt><dd>Used when North is above zero. Just = sweet pure thirds, Pythagorean = open fifths, Harmonic series = overtone flavour, Meantone = warm old keys.</dd>
+  <dt>Root mode, Fixed root</dt><dd>Pure tuning is built on the lowest note sounding, or on a fixed note you choose.</dd>
+  <dt>Glide</dt><dd>How slowly pitches and tuning shifts move to a new value.</dd>
+  <dt>Bend range</dt><dd>Pitch-wheel range in semitones (0 to 24). In the Sound tab under More controls.</dd>
+  <dt>Reverb, Size, Damp, Pre-delay</dt><dd>Amount of room, small room to endless hall, how fast highs die away, gap before the reverb starts.</dd>
+  <dt>Width</dt><dd>Stereo width of the whole sound; below 100% narrows towards mono.</dd>
+  <dt>Reverb &gt; out 2</dt><dd>Sends the reverb to a second stereo output. See <a href="#outputs">Outputs</a>.</dd>
+</dl>
+</section>
+
+<section id="filter" data-keys="ladder lowpass cutoff resonance">
+<h2>Filter tab <a class="top" href="#top">top</a></h2>
+<dl>
+  <dt>Model</dt><dd><b>Clean</b> = transparent 12 dB filter. <b>Ladder</b> = 24 dB transistor-ladder style that saturates and loses bass as resonance rises. <b>Ladder 12 dB</b> = gentler version. A curve shows the response.</dd>
+  <dt>Cutoff, Resonance</dt><dd>Closes the sound like a curtain; emphasis at the cutoff.</dd>
+  <dt>Drive</dt><dd>Pushes the sound into the filter for warmth and growl (0 to 24 dB).</dd>
+  <dt>Key track</dt><dd>The cutoff follows the lowest note, so higher chords stay as bright as lower ones.</dd>
+  <dt>Filter mix</dt><dd>Blends the unfiltered and filtered sound.</dd>
+  <dt>Low cut</dt><dd>Removes rumble below this frequency so the drone leaves room for your bass.</dd>
+  <dt>Warmth</dt><dd>Gentle tape-like saturation.</dd>
+</dl>
+</section>
+
+<section id="motion" data-keys="lfo modulation matrix mod routing connections motion ring arc badge">
+<h2>Modulation tab: LFOs and the Matrix <a class="top" href="#top">top</a></h2>
+<h3>LFO 1 and LFO 2</h3>
+<p>Shapes: Sine, Triangle, Saw, Square, Smooth random, Stepped random. <b>Rate</b> in cycles per second, or <b>Sync</b> to the host tempo with a length of 4 bars, 2 bars, 1 bar, 1/2, 1/4, 1/8 or 1/16.</p>
+<h3>The Matrix</h3>
+<p>Up to eight connections, each <b>source &rarr; target</b> with an amount from -100% to +100%. 100% sweeps the target across its whole range (Cutoff: four octaves); negative flips the direction. Only connections in use are shown; click <b>Add a connection</b> for a new one. Set source and target to None to remove it. A knob that is being moved shows an orange ring.</p>
+<dl>
+  <dt>Sources</dt><dd>LFO 1, LFO 2, Random walk; the whole sky: Aircraft count, Aircraft altitude, Aircraft proximity, Aircraft speed; your playing: Mod wheel, Velocity, Aftertouch, Pitch bend; the macros Tension, Light, Motion, Space; and per class (in two sub-menus): <b>&lt;class&gt; count</b> and <b>&lt;class&gt; altitude</b>.</dd>
+  <dt>Targets</dt><dd>Colour, Morph, Morph motion, Life, Air, Beat, Drift, Cutoff, Resonance, Drive, Pan spread, Width, Reverb mix, Output, Attack, Release, Glide, Drift rate, Low cut, Warmth, Filter mix, Key track, Reverb size, Reverb damp, Range, Ghost level, Loop stretch, LFO 1 rate, LFO 2 rate; per class (in two sub-menus): <b>&lt;class&gt; gain</b> and <b>&lt;class&gt; octave</b>; and Inharmonic, Odd/Even, Breath, North, Consonance, Evolve.</dd>
+</dl>
+<h3>Modulate by (right-click a knob)</h3>
+<p>Every knob has the same right-click menu: <b>Type a value</b>, <b>Modulate by</b> (a connection is made in the first free row at 25%), and the knob's connections, each with <b>Remove</b>, plus <b>Show in the Matrix</b>. Knobs that can't be moved by a connection say so in the menu.</p>
+<p>A knob with a connection always shows it: a thin orange <b>arc</b> for the range each connection covers, and an orange <b>dot</b> at its top right (with the number when several sources move it; they add up). Hover the knob to see which sources. A brighter arc shows where the control is right now. <b>Drag the orange ring</b> up or down to change the amount (of the first connection), double-click the ring for 25%.</p>
+<p>In the Matrix, <b>&times;</b> removes a row and the arrow between source and target opens the tab with that control and flashes it.</p>
+<h3>Per-class connections</h3>
+<p><b>&lt;class&gt; count</b> goes from 0 (none in range) to full at four or more of that class. <b>&lt;class&gt; altitude</b> is their average height (full = 40,000 ft). Sky sources change smoothly over about five seconds, so new data never jumps.</p>
+<p>For targets, 100% covers the whole range: <b>octave</b> spans 4 octaves, so <b>25% = one octave</b>; <b>gain</b> spans 18 dB.</p>
+<div class="note">Example: <b>Helicopter count &rarr; Helicopter octave</b> at 25%: when four or more helicopters are around, they all move up an octave. <b>Heavy altitude &rarr; Cutoff</b>: the whole sound opens as long-haul jets climb.</div>
+</section>
+
+<section id="skytab" data-keys="harmony guard scale key fix">
+<h2>Sky tab: key, scale, Consonance <a class="top" href="#top">top</a></h2>
+<dl>
+  <dt>Key, Scale</dt><dd>All sky notes belong to this key and scale: Dorian, Minor, Major, Lydian, Mixolydian, Phrygian, Pentatonic minor, Pentatonic major, Hirajoshi, Whole tone, Open fifths (root, fifth, ninth) or Chromatic. Pentatonic scales are the safest; chromatic allows anything.</dd>
+  <dt>Range, Lowest octave</dt><dd>How many octaves the altitudes cover (0.5 to 4), and the lowest register used.</dd>
+  <dt>Consonance</dt><dd>How strictly harsh intervals are avoided. See <a href="#how">How the sky becomes music</a>.</dd>
+  <dt>Anchor, Anchor fifth</dt><dd>The steady root of the drone bed, with an optional fifth above.</dd>
+  <dt>Quiet fill, Ghost level</dt><dd>If fewer aircraft than this are sounding, soft ghost notes fill in, at this level.</dd>
+  <dt>Evolve, Period</dt><dd>How much register and brightness move over time, and minutes per slow cycle.</dd>
+  <dt>Loop stretch</dt><dd>Makes all breathing loops longer or shorter.</dd>
+  <dt>Sky</dt><dd>Turns the sky off; then Aeola is a drone synth you play with MIDI.</dd>
+  <dt>Sky source, Sim traffic, Sim = transport</dt><dd>See <a href="#data">traffic sources</a> and <a href="#render">renders</a>.</dd>
+  <dt>Why does this sound off?</dt><dd>Checks the settings that most often make a sky sound unmusical and fixes them: switches chromatic or whole-tone scales to Pentatonic minor, raises Consonance, calms a very fast Beat, turns the Anchor on, recentres Tension. It tells you what it changed.</dd>
+  <dt>Freeze, Hold, Drag MIDI, Places to try</dt><dd>See <a href="#render">renders</a>, <a href="#play">Hold</a>, <a href="#dragmidi">Drag MIDI</a> and <a href="#place">Place</a>.</dd>
+</dl>
+</section>
+
+<section id="mix" data-keys="mixer fader pan volume level meter multi output multi-out separate outputs mixing">
+<h2>Mix tab and separate outputs <a class="top" href="#top">top</a></h2>
+<p>The <b>Mix</b> tab (Advanced) has one strip per aircraft class: a <b>fader</b> (down to -inf dB), a <b>pan</b> knob, <b>S</b>olo and <b>M</b>ute, and a meter. The fader and pan are separate from the class's <b>Gain</b> on the Aircraft tab (shown small under each strip's name), so you can ride a live mix without touching the sound design. Double-click a fader for 0 dB. Presets and A/B never change the mix.</p>
+<p>All mixer controls can be automated and mapped to a MIDI controller (in Live: MIDI Map mode, then move the fader).</p>
+<h3>Separate outputs</h3>
+<p>Click <b>Separate outputs</b> in the Mix tab (or in Settings) to send each class to its own stereo output, so you can mix, process and record the classes in your DAW. These outputs are dry: Aeola's reverb only works on the main output. The drone bed, ghost notes and notes you play stay in the main output.</p>
+<ol>
+  <li>Turn Separate outputs on.</li>
+  <li>In Ableton Live, create an audio track, set <b>Audio From</b> to the Aeola track and choose a class (Light / GA, Heavy, ...) in the box below. Set Monitor to In. Repeat for each class you want.</li>
+  <li>A class whose output is not switched on in the host stays in the main output, so nothing goes missing. The Mix tab says how many class outputs the host has switched on.</li>
+</ol>
+<p class="dim">In Logic, choose the multi-output version of Aeola when you insert it, if your Logic offers it. This has not been tested in every host.</p>
+</section>
+
+<section id="macros">
+<h2>Macros <a class="top" href="#top">top</a></h2>
+<p>Four big controls that move several things at once (bottom right in Advanced, in the strip in Simple). The centre is neutral.</p>
+<dl>
+  <dt>Tension</dt><dd>Left = calm and consonant. Right = more shimmer (Beat), more inharmonic, lower Consonance, so more daring intervals.</dd>
+  <dt>Light</dt><dd>Left = dark and warm. Right = bright and airy (Colour and Cutoff).</dd>
+  <dt>Motion</dt><dd>Left = still. Right = more drift, faster drift, more breathing and evolving.</dd>
+  <dt>Space</dt><dd>Left = dry. Right = more and larger reverb.</dd>
+</dl>
+<p>The macros can also be modulation sources, and are good to automate (the "Tension Rise" preset is built for that).</p>
+</section>
+
+<section id="presets" data-keys="preset morph snapshot random">
+<h2>Presets, A/B and Randomise <a class="top" href="#top">top</a></h2>
+<p>About thirty factory presets, each saying what it is for, for example: Arlanda Dawn (ambient bed), Cargo Night (score cue), Pure Fifths (meditation), Beating Lab (hear what tuning does), Piano vs Pure (ear training), Dark Matter (sub drone), Simulated Calm (works fully offline), Keys Companion (play over it), Frozen Chord (hold and play over), Tension Rise (automate Tension), Tape Loops (Eno-style unequal loops). <b>Save</b> stores your own; they appear under User in the menu.</p>
+<p>Presets change the sound only. Your place, radius, sky source, solos and mutes, Hold and Output stay as they are.</p>
+<p><b>A and B</b> store two snapshots of the sound; the slider between them morphs continuously from A to B, so you can automate a slow change between two sounds. Like presets, A/B leave place and sky alone.</p>
+<p><b>Randomise</b> makes a new sound within musical limits.</p>
+</section>
+
+<section id="play" data-keys="midi keyboard sustain pitch bend aftertouch hold freeze chord">
+<h2>Playing it with a keyboard <a class="top" href="#top">top</a></h2>
+<p>Aeola is also a playable synth. Notes you play sound with the base sound, on top of the sky.</p>
+<ul>
+  <li><b>Velocity</b> sets the level (amount set by the Velocity knob) and is a modulation source.</li>
+  <li><b>Sustain pedal</b> (CC 64) holds notes.</li>
+  <li><b>Mod wheel</b> (CC 1) opens the brightness (how much: the Mod wheel knob, Sound tab, More controls) and is a modulation source.</li>
+  <li><b>Pitch bend</b> bends by the Bend range; <b>aftertouch</b> (channel or poly) is a modulation source.</li>
+  <li><b>All notes off</b> (CC 120/123) stops played notes.</li>
+</ul>
+<p><b>Hold</b> freezes the chord the sky is playing now, so you can play over a stable harmony. The sky view shows when Hold is on.</p>
+</section>
+
+<section id="midiout" data-keys="midi output routing notes controller hardware">
+<h2>MIDI out <a class="top" href="#top">top</a></h2>
+<p>Each sounding aircraft can send a MIDI note to other instruments: note-on when it starts sounding, note-off when it leaves or changes note. The pitch is the note Aeola plays for it; velocity follows its level, so closer is louder. The drone bed and ghost notes are not sent.</p>
+<p>Settings, <b>MIDI out (VST3)</b>:</p>
+<dl>
+  <dt>On</dt><dd>Sends the aircraft notes. While it is on, the notes you play into Aeola are not passed through.</dd>
+  <dt>Mute sound</dt><dd>No audio from Aeola; it becomes a pure controller.</dd>
+  <dt>Channel per class (for hardware)</dt><dd>Each class gets its own MIDI channel: Light 1, Small 2, Narrowbody 3, Heavy 4, Helicopter 5, Freight 6, Business jet 7, Turboprop 8, Military 9. Off = all on channel 1. Useful for hardware and multi-timbral synths. Live cannot filter by channel inside a project, so in Live use Class instead.</dd>
+  <dt>Class</dt><dd><b>All (source)</b>, or one class only. See <a href="#classtracks">class tracks</a>.</dd>
+</dl>
+<h3>In Ableton Live</h3>
+<ol>
+  <li>Use the <b>VST3</b> version (Live cannot take MIDI out of an Audio Unit).</li>
+  <li>Put Aeola on a MIDI track and turn MIDI out on.</li>
+  <li>Create another MIDI track with any instrument. Set <b>MIDI From</b> to the Aeola track, choose Aeola below it, and set Monitor to <b>In</b>.</li>
+  <li>Arm that track to record the aircraft as a MIDI clip.</li>
+</ol>
+<p class="dim">Notes change as aircraft come and go, so the result is slow and sparse, like the drone itself.</p>
+</section>
+
+<section id="classtracks" data-keys="follower source copy instances tracks record">
+<h2>One class per track in Live <a class="top" href="#top">top</a></h2>
+<p>To record each aircraft class on its own track, all from the same sky:</p>
+<ol>
+  <li>Track 1: Aeola with MIDI out <b>On</b> and Class <b>All (source)</b>. This one fetches the data and plays the sky.</li>
+  <li>For each class you want: another track with Aeola, MIDI out <b>On</b>, <b>Mute sound</b>, and Class set to that class (for example Helicopter).</li>
+  <li>Route each of those to an instrument track as above.</li>
+</ol>
+<p>An Aeola set to one class <b>copies</b> that class from the source Aeola: it fetches no data, maps no sky of its own and makes no sound, so all tracks share exactly one sky and the daily data limit is not used up faster. Settings shows "Copying the Aeola set to All". If there is no source Aeola, it shows "No Aeola set to All: own sky" and uses its own data. If the source is removed, the copies notice within about two seconds and let go of their notes.</p>
+</section>
+
+<section id="dragmidi" data-keys="export midi clip drag">
+<h2>Drag MIDI <a class="top" href="#top">top</a></h2>
+<p>Aeola remembers the notes it played. Drag the <b>Drag MIDI</b> handle into your DAW to get the last 30 minutes as a MIDI clip: aircraft on channel 1, notes you played on channel 2, the drone bed and ghost notes on channel 3. Works with Audio Unit and VST3, in any host that accepts dragged MIDI files.</p>
+</section>
+
+<section id="render" data-keys="bounce export freeze replay identical record">
+<h2>Recording and repeatable renders <a class="top" href="#top">top</a></h2>
+<p>Live traffic never repeats, so a bounce made today will not match one made tomorrow. Three ways to get identical renders:</p>
+<dl>
+  <dt>Freeze</dt><dd>Saves the recent real traffic inside your project and switches the source to Replay. Every bounce of that project is then identical.</dd>
+  <dt>Simulated + Sim = transport</dt><dd>The simulated sky follows the DAW timeline, so each position in the song always has the same aircraft.</dd>
+  <dt>Record the audio</dt><dd>Recording Aeola's output to an audio track is the simplest way to keep a take.</dd>
+</dl>
+<p>The hint line says "This sky is repeatable: bounces will be identical" when one of the first two is active.</p>
+</section>
+
+<section id="outputs" data-keys="multi output aux send">
+<h2>Outputs <a class="top" href="#top">top</a></h2>
+<p>Aeola has a main stereo output with a safety limiter. With <b>Reverb &gt; out 2</b> on, the reverb goes to a second stereo output instead, so you can process the dry drone and the room separately. Enable the second output in your host. In Live, create an audio track and choose Aeola's second output in its Audio From.</p>
+</section>
+
+<section id="automation" data-keys="automate configure controller midi map learn 64">
+<h2>Automation in your DAW <a class="top" href="#top">top</a></h2>
+<p>Exactly 64 controls can be automated or mapped to a controller, because Ableton Live sets up plug-ins with up to 64 parameters by itself, so they all appear in its automation list from the start:</p>
+<ul>
+  <li>The macros: Tension, Light, Motion, Space; and Output.</li>
+  <li>Sound: Morph, Life, Air, Colour, Beat, Drift, Breath, Attack, Release.</li>
+  <li>Filter: Cutoff, Resonance, Drive, Warmth. Space: Reverb, Size, Width. Tune: North, Glide.</li>
+  <li>Sky: Consonance, Evolve, Radius, Aircraft, Hold.</li>
+  <li>The mixer: fader, pan, solo and mute for each of the nine classes.</li>
+</ul>
+<p>Everything else (sources, menus, the class voices, LFO and connection settings, MIDI out, data settings) is saved with your project but cannot be automated. To move those over time, use a <a href="#motion">connection</a> from an LFO or a macro. Automation drawn on them in projects from before 1.12 no longer plays.</p>
+</section>
+
+<section id="hostonly" data-keys="hidden parameter">
+<h2>Controls without automation <a class="top" href="#top">top</a></h2>
+<p>Every control is in the window. Up to 1.11, Bend range, Mod wheel, Ghost level and Sim seed had no control of their own; since 1.12 they do (Sound tab under More controls, and the Sky tab).</p>
+<p>Not every control can be automated: see <a href="#automation">Automation in your DAW</a>.</p>
+</section>
+
+<section id="settings" data-keys="menu preferences gear">
+<h2>Settings menu <a class="top" href="#top">top</a></h2>
+<dl>
+  <dt>Interface size</dt><dd>75, 100, 125, 150 or 200%.</dd>
+  <dt>Show the intro tour again</dt><dd>Same as the ? button.</dd>
+  <dt>Fetch live traffic now</dt><dd>Requests a new snapshot (it counts towards the daily limit).</dd>
+  <dt>Use adsb.fi as a backup when the daily limit is reached</dt><dd>Off by default; personal, non-commercial use only.</dd>
+  <dt>Separate outputs: one stereo output per aircraft class</dt><dd>See <a href="#mix">Mix tab</a>.</dd>
+  <dt>MIDI out (VST3)</dt><dd>On, Mute sound, Channel per class, Class. See <a href="#midiout">MIDI out</a>.</dd>
+  <dt>Send feedback...</dt><dd>Opens an email with the technical details filled in.</dd>
+  <dt>Details for a bug report...</dt><dd>A copyable box: version, system, host, kind of place, sky source, aircraft, data age, requests made today, daily limit and the last problem. It never includes the coordinates or address of a place you searched for.</dd>
+  <dt>Support Aeola (Ko-fi), Website and download</dt><dd>Links.</dd>
+  <dt>Look for a new version once a day</dt><dd>The update check; on by default.</dd>
+  <dt>About</dt><dd>Version, licence and data credits.</dd>
+</dl>
+</section>
+
+<section id="keys" data-keys="shortcuts hotkeys keyboard mouse">
+<h2>Keyboard and mouse <a class="top" href="#top">top</a></h2>
+<p>Keys work when the sky view has focus (click it first).</p>
+<table>
+<tr><th>Key or action</th><th>What it does</th></tr>
+<tr><td><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd></td><td>Sound, Sky, Earth view</td></tr>
+<tr><td><kbd>+</kbd> / <kbd>-</kbd></td><td>Smaller / larger radius</td></tr>
+<tr><td><kbd>0</kbd></td><td>Radius 40 nm</td></tr>
+<tr><td><kbd>L</kbd></td><td>Land on or off</td></tr>
+<tr><td><kbd>S</kbd> / <kbd>M</kbd></td><td>Solo / mute the class of the pinned aircraft</td></tr>
+<tr><td><kbd>Esc</kbd></td><td>Unpin the card</td></tr>
+<tr><td>Scroll over the view</td><td>Change the radius (Sky map: zoom the map)</td></tr>
+<tr><td>Double-click empty space</td><td>Radius 40 nm (Sky map: back to the circle; Earth: reset tilt and rotation)</td></tr>
+<tr><td>Drag the dashed circle (Sky map)</td><td>Change the radius</td></tr>
+<tr><td>Drag empty space (Sky map)</td><td>Move the map</td></tr>
+<tr><td>Drag (Earth)</td><td>Rotate and tilt</td></tr>
+<tr><td>Hover / click an aircraft</td><td>Show / pin its card</td></tr>
+<tr><td>Click / Alt-click / double-click a class chip</td><td>Solo / mute / clear all</td></tr>
+<tr><td>Right-click or Ctrl-click a knob</td><td>Type a value, or Modulate by a source</td></tr>
+<tr><td>Double-click a connection amount</td><td>Back to 0%</td></tr>
+</table>
+</section>
+
+<section id="trouble" data-keys="problem bug not working help">
+<h2>Troubleshooting <a class="top" href="#top">top</a></h2>
+<dl>
+  <dt>It sounds off or clashes</dt><dd>Click <b>Why does this sound off?</b> in the Sky tab, raise Consonance, or choose a pentatonic scale.</dd>
+  <dt>No aircraft, only the drone</dt><dd>Read the hint line: no internet, the daily limit is reached, or there is simply no traffic in range right now (try a larger Radius or an airport). Choose Simulated if you want invented traffic.</dd>
+  <dt>"Daily data limit reached"</dt><dd>See <a href="#quota">Daily data limit</a>. It resets at 00:00 UTC.</dd>
+  <dt>The host shows an old version, or two Aeolas</dt><dd>Delete old "Aeola VST" or "Aeola Drone" bundles from <code>~/Library/Audio/Plug-Ins</code> (all sub-folders) and rescan. Settings, About shows which version is loaded.</dd>
+  <dt>Aeola is missing as a MIDI source in Live</dt><dd>Use the VST3 version, turn MIDI out on, and pick the Aeola track in MIDI From.</dd>
+  <dt>A class plays though nothing is in the sky</dt><dd>A class is soloed: you hear the AUDITION aircraft. Double-click a class chip to clear solos.</dd>
+  <dt>Different aircraft than on a flight-tracking site</dt><dd>Normal: different receiver networks see different aircraft.</dd>
+  <dt>Something else</dt><dd>Settings, <b>Send feedback</b>, or write to <a href="mailto:aeola@skepp.se">aeola@skepp.se</a>.</dd>
+</dl>
+</section>
+
+<section id="privacy" data-keys="privacy data license gpl credits">
+<h2>Data, privacy and credits <a class="top" href="#top">top</a></h2>
+<p>Aeola sends: the position and radius of your place to adsb.lol (and adsb.fi if you turned the backup on) to fetch traffic; what you type in the place search to OpenStreetMap's Nominatim; and, once a day if enabled, one request for the version file on this website. Nothing else, and nothing about you. Snapshots are saved on your Mac in <code>~/Library/Application Support/AeolaDrone</code> and deleted after 14 days.</p>
+<p>Traffic data: <a href="https://adsb.lol">adsb.lol</a> (ODbL 1.0), optional backup <a href="https://adsb.fi">adsb.fi</a>. Coastlines: <a href="https://www.naturalearthdata.com">Natural Earth</a> (public domain). Built with JUCE.</p>
+<p>Aeola is free software under GPL-3.0. Source code: <a href="https://github.com/orgfwd/aeola-vst">github.com/orgfwd/aeola-vst</a>. Aeola web, a lighter browser version, is at <a href="https://aeola.vercel.app">aeola.vercel.app</a>.</p>
+</section>
+
+<footer>By Alex Skepp. <a href="index.html">Aeola</a> &middot; <a href="mailto:aeola@skepp.se">aeola@skepp.se</a></footer>
+</main>
+
+<script>
+(() => {
+  const q = document.getElementById('q'), count = document.getElementById('count');
+  const sections = [...document.querySelectorAll('main section')];
+  const tocItems = new Map([...document.querySelectorAll('#toc li')].map(li => [li.querySelector('a').getAttribute('href').slice(1), li]));
+  const original = new Map(sections.map(s => [s, s.innerHTML]));
+  const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  function highlight(node, re) {
+    const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, null);
+    const hits = []; let n;
+    while ((n = walker.nextNode())) if (re.test(n.nodeValue)) hits.push(n);
+    re.lastIndex = 0;
+    for (const t of hits) {
+      const span = document.createElement('span');
+      span.innerHTML = t.nodeValue.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c])).replace(re, m => '<mark>' + m + '</mark>');
+      t.replaceWith(span);
+    }
+  }
+
+  function run() {
+    const words = q.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    let shown = 0, first = null;
+    for (const s of sections) {
+      s.innerHTML = original.get(s);
+      const text = (s.textContent + ' ' + (s.dataset.keys || '')).toLowerCase();
+      const ok = words.every(w => text.includes(w));
+      s.classList.toggle('hidden', !ok);
+      const li = tocItems.get(s.id); if (li) li.classList.toggle('hidden', !ok);
+      if (ok) { shown++; if (!first) first = s; if (words.length) highlight(s, new RegExp(words.map(esc).join('|'), 'gi')); }
+    }
+    count.textContent = words.length ? (shown ? shown + (shown === 1 ? ' section matches' : ' sections match') + '. Enter jumps to the first.' : 'Nothing found. Try a shorter word.') : '';
+    return first;
+  }
+  q.addEventListener('input', run);
+  q.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { const f = run(); if (f) f.scrollIntoView({ behavior: 'smooth' }); }
+    if (e.key === 'Escape') { q.value = ''; run(); q.blur(); }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); q.select(); }
+  });
+  const p = new URLSearchParams(location.search).get('q'); if (p) { q.value = p; run(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aeola</title>
+<meta name="description" content="A free instrument that plays the aircraft flying over a place, live.">
+<link rel="icon" href="icon-1024.png">
+<style>
+  :root { --bg:#141618; --panel:#1b1d20; --edge:#2b2e33; --text:#dde1e4; --dim:#8a9299; --accent:#6ed6a0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:17px/1.6 -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  main { max-width: 680px; margin: 0 auto; padding: 56px 22px 72px; }
+  h1 { font-size: 15px; letter-spacing: .32em; font-weight: 600; margin: 0 0 40px; }
+  h1 small { color: var(--dim); font-weight: 400; letter-spacing: .1em; font-size: 12px; margin-left: 6px; }
+  h2 { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); font-weight: 600; margin: 48px 0 10px; }
+  p { margin: 0 0 14px; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  img.shot { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--edge); display: block; margin: 28px 0 6px; }
+  .cap { color: var(--dim); font-size: 14px; margin-bottom: 28px; }
+  .dl { display: inline-block; background: var(--accent); color: #0f1a14; text-decoration: none; font-weight: 600; padding: 10px 18px; border-radius: 6px; margin: 4px 0 8px; }
+  .dim { color: var(--dim); font-size: 15px; }
+  ol { padding-left: 22px; margin: 0 0 14px; } li { margin-bottom: 6px; }
+  code { background: var(--panel); border: 1px solid var(--edge); border-radius: 4px; padding: 1px 6px; font-size: 14px; }
+  footer { margin-top: 56px; color: var(--dim); font-size: 14px; border-top: 1px solid var(--edge); padding-top: 18px; }
+</style>
+</head>
+<body>
+<main>
+<h1>AEOLA</h1>
+
+<p>Aeola is an instrument that plays the aircraft flying over a place, as they fly.</p>
+<p>Pick an airport or any spot on earth. Every aircraft within range becomes a note: the higher it flies, the higher the note; the closer it is, the louder. Notes are kept in a key and a scale, so the result stays musical. Freight, heavy jets, helicopters and business jets each have their own voice.</p>
+
+<img class="shot" src="shot_sound.png" alt="Aeola in Simple mode: one column per note, aircraft placed by altitude and distance" width="1040" height="760">
+<div class="cap">Sound view (Simple mode). Each column is a note, height is distance. The sky shown is simulated.</div>
+<img class="shot" src="shot_map.png" alt="Aeola's Sky map in Advanced mode: aircraft around Stockholm Arlanda inside the dashed listening circle, with the Aircraft tab below" width="1040" height="760">
+<div class="cap">Sky map (Advanced mode) with the Aircraft tab. The dashed circle is the listening radius. The sky shown is simulated.</div>
+<img class="shot" src="shot_earth.png" alt="Aeola's Earth view: aircraft over the Stockholm archipelago with altitude stems" width="1040" height="760">
+<div class="cap">Earth view. Drag to tilt and rotate. The sky shown is simulated.</div>
+<img class="shot" src="shot_mix.png" alt="Aeola's Mix tab: one fader, pan, solo and mute per aircraft class" width="1040" height="760">
+<div class="cap">Mix tab: a fader and pan for every aircraft class, and optional separate outputs. The sky shown is simulated.</div>
+
+<h2>Download</h2>
+<p><a class="dl" href="https://github.com/orgfwd/aeola-vst/releases/latest">Aeola for Mac</a></p>
+<p class="dim">Version <span id="v">1.13.1</span>. Installs VST3, Audio Unit and a standalone app. macOS 11 or later on Apple silicon, 10.13 or later on Intel. No Windows version yet.</p>
+
+<p>The installer is not signed by Apple, so macOS will refuse to open it the first time:</p>
+<ol>
+  <li>Double-click the installer. macOS says it can't be opened.</li>
+  <li>Open System Settings, then Privacy &amp; Security.</li>
+  <li>Scroll down, click <b>Open Anyway</b> next to Aeola, and confirm.</li>
+</ol>
+<p class="dim">This is a beta. If something is off, tell me.</p>
+
+<h2>Try it in the browser</h2>
+<p>A lighter version runs in your browser at <a href="https://aeola.vercel.app">aeola.vercel.app</a>. No install, same idea, fewer controls. It is a good way to hear what Aeola does before downloading the plugin or when you're on the go (Aeola was actually originally built to use while flying). It also features a loop-based field recorder, which the plug-in doesn't.</p>
+
+<h2>What you need to know</h2>
+<p><b>Live traffic needs internet.</b> Data comes from <a href="https://adsb.lol">adsb.lol</a>, which allows 500 requests a day per network. Aeola spreads those out, so a new snapshot arrives every minute or two. If the limit runs out, it keeps the last real snapshot, or plays only the drone bed, and says why. It never makes up traffic unless you choose Simulated in Sky source.</p>
+<p><b>Positions are not a flight tracker.</b> Different receivers see different aircraft, so the count can differ from other tools.</p>
+<p><b>Settings has everything else:</b> interface size, feedback, a copyable details box for bug reports, and an optional once-a-day check for new versions (a single request to this page, nothing sent about you).</p> <p><a href="manual.html">Read the manual</a>: every feature on one page, with search.</p>
+
+<h2>Feedback</h2>
+<p>Write to <a href="mailto:aeola@skepp.se">aeola@skepp.se</a>. What did you hear, what did you expect, what host are you using. In the plugin, Settings has "Send feedback" and "Details for a bug report", which fill in the technical part.</p>
+
+<h2>Free</h2>
+<p>Aeola is free and open source (GPL-3.0). If you like it and want to help, you can <a href="https://ko-fi.com/aeola">support it on Ko-fi</a>. Source code and issues: <a href="https://github.com/orgfwd/aeola-vst">github.com/orgfwd/aeola-vst</a>.</p>
+
+<footer>
+  By Alex Skepp. Traffic data: adsb.lol (ODbL), optional backup adsb.fi. Coastlines: Natural Earth. Built with JUCE.
+</footer>
+</main>
+<script>
+fetch('https://orgfwd.github.io/aeola-vst/version.json').then(r => r.json()).then(j => { if (j.version) document.getElementById('v').textContent = j.version; }).catch(() => {});
+</script>
+</body>
+</html>

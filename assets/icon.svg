@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#202327"/><stop offset="1" stop-color="#121416"/>
+    </linearGradient>
+    <radialGradient id="disc" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#1a1d20"/><stop offset="1" stop-color="#0f1113"/>
+    </radialGradient>
+    <radialGradient id="glowA" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#e0a854" stop-opacity="0.55"/><stop offset="1" stop-color="#e0a854" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowG" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#6ed6a0" stop-opacity="0.45"/><stop offset="1" stop-color="#6ed6a0" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="dc"><circle cx="512" cy="512" r="356"/></clipPath>
+  </defs>
+  <rect x="48" y="48" width="928" height="928" rx="206" fill="url(#bg)"/>
+  <rect x="49" y="49" width="926" height="926" rx="205" fill="none" stroke="#33373d" stroke-width="2"/>
+  <circle cx="512" cy="512" r="356" fill="url(#disc)"/>
+  <g fill="none" stroke="#363a40" stroke-width="5">
+    <circle cx="512" cy="512" r="356" stroke="#454a51" stroke-width="7"/>
+    <circle cx="512" cy="512" r="238"/>
+    <circle cx="512" cy="512" r="120"/>
+  </g>
+  <g stroke="#2a2d32" stroke-width="4" clip-path="url(#dc)">
+    <line x1="512" y1="156" x2="512" y2="868"/><line x1="156" y1="512" x2="868" y2="512"/>
+  </g>
+  <circle cx="512" cy="512" r="9" fill="#8a9299"/>
+  <!-- the Consonance move: where altitude wanted the note (dashed outline) -> where it plays -->
+  <polygon points="330,392 380,480 280,480" fill="none" stroke="#e0a854" stroke-opacity="0.55" stroke-width="9" stroke-linejoin="round"/>
+  <path d="M 404 440 L 560 330" stroke="#e0a854" stroke-width="9" stroke-linecap="round" stroke-dasharray="4 22" fill="none"/>
+  <circle cx="665" cy="318" r="130" fill="url(#glowA)"/>
+  <circle cx="665" cy="318" r="62" fill="none" stroke="#e0a854" stroke-width="8" stroke-opacity="0.9"/>
+  <polygon points="665,276 705,346 625,346" fill="#e0a854" stroke="#e0a854" stroke-width="12" stroke-linejoin="round"/>
+  <!-- sounding aircraft -->
+  <circle cx="660" cy="690" r="120" fill="url(#glowG)"/>
+  <rect x="622" y="652" width="76" height="76" rx="14" fill="#dde1e4"/>
+  <polygon points="372,664 420,692 420,748 372,776 324,748 324,692" fill="#4fb3b0" stroke="#4fb3b0" stroke-width="10" stroke-linejoin="round"/>
+</svg>
